@@ -4,12 +4,12 @@ import cross_icon from '../../assets/cross_icon.png';
 
 const ListProduct = () => {
 
-    const [allproduct, setAllProducts] = useState([]);
+    const [allproducts, setAllProducts] = useState([]);
 
     const fetchInfo = async () => {
-        await fetch('http://localhost:4000/allproduct')
+        await fetch('http://localhost:4000/allproducts')
             .then((res) => res.json())
-            .then((data) => { setAllProducts(data) });
+            .then((data) => {setAllProducts(data)});
     }
     useEffect(() => {
         fetchInfo();
@@ -40,10 +40,10 @@ const ListProduct = () => {
             </div>
             <div className="listproduct-allproducts">
                 <hr />
-                {allproduct.map((product) => {
+                {allproducts.map((product,index) => {
                     return (
-                        <React.Fragment key={product.id}>
-                            <div className="listproduct-format-main listproduct-format">
+                        <>
+                            <div key={index} className="listproduct-format-main listproduct-format">
                                 <img src={product.image} alt="" className="listproduct-product-icon" />
                                 <p>{product.name}</p>
                                 <p>${product.old_price}</p>
@@ -52,7 +52,7 @@ const ListProduct = () => {
                                 <img onClick={() => remove_product(product.id)} className='listproduct-remove-icon' src={cross_icon} alt="" />
                             </div>
                             <hr />
-                        </React.Fragment>
+                            </>
                     )
                 })}
             </div>
